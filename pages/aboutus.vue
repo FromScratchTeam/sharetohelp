@@ -33,6 +33,10 @@ section {
   max-width: 1000px;
   gap: 60px;
   padding: 0 15px;
+
+  @include mq($from: desktop) {
+    padding: 0;
+  }
 }
 
 .item {
