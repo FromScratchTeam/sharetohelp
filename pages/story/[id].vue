@@ -15,7 +15,7 @@
 
 <script setup>
 import { mask } from 'maska'
-import dateFormat from "dateformat";
+import dateFormat from "dateformat"
 
 const route = useRoute()
 

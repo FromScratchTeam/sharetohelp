@@ -1,6 +1,13 @@
 <template>
 <div class="container">
   <section>
+    <div>
+      <div text-default class="user-view">
+        Telegram <NuxtLink :to="link" target="_blank">@{{ post.telegramUsername }}</NuxtLink>
+        <div class="date">{{ createdAt }}</div>
+      </div>
+      <AboutUser :cardnumber="post.creditcard" :cryptoaddress="post.cryptoaddress" />
+    </div>
     <h1 header-text class="title">{{ post.title }}</h1>
     <div text-default v-html="post.story" class="post-content"></div>
   </section>
@@ -14,6 +21,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification'
+import dateFormat from "dateformat"
 
 const router = useRouter()
 const route = useRoute()
@@ -21,6 +29,7 @@ const toast = useToast()
 const { t } = useI18n()
 
 const post = ref()
+const createdAt = ref('')
 
 try {
   const { data } = await useAsyncData('mypost', () => $fetch('/api/me[post]', {
@@ -31,6 +40,7 @@ try {
   )
 
   post.value = { ...data.value }
+  createdAt.value = dateFormat(post.value.createdAt, "dd.mm.yyyy, hh:MM")
 } catch {
   console.error(err)
 }
@@ -94,6 +104,21 @@ section {
 
   @include mq($from: tablet) {
     padding-bottom: 0;
+  }
+}
+
+.user-view {
+  margin-bottom: 20px;
+}
+
+.date {
+  margin-top: 5px;
+  color: var(--color-placeholder);
+  font-size: 16px;
+
+  @include mq($from: tablet) {
+    margin-top: 10px;
+    font-size: 18px;
   }
 }
 </style>

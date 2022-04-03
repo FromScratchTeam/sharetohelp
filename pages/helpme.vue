@@ -65,7 +65,7 @@ const submitPost = async () => {
 
     router.replace({ name: 'me-post', params: { post: data.token } })
   } catch ({ response }) {
-    toast.error(response.data)
+    toast.error(t(response.data))
   }
 }
 
