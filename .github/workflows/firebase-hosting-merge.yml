@@ -11,8 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install -g yarn && yarn install && yarn build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Install dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHAREHELP_A354B }}'
