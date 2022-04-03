@@ -33,7 +33,7 @@ const post = ref()
 const createdAt = ref('')
 
 try {
-  const { data } = await useAsyncData('mypost', () => $fetch('/api/me[post]', {
+  const { data } = await useAsyncData('ownpost', () => $fetch('/api/ownpost', {
       params: {
         post: route.params.post
       }
