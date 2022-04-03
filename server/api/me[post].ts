@@ -11,5 +11,6 @@ export default async (req: IncomingMessage) => {
     .where('token', '==', post).get()
   const data = docs[0].data()
 
+  delete data.iphash
   return data
 }

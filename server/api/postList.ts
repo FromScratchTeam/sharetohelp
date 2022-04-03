@@ -20,6 +20,7 @@ export default async () => {
 
     const [firstImage] = data.story.match(imagePattern) || []
     delete data.token
+    delete data.iphash
 
     const [, imgSrc] = (firstImage || '').match(/src\=\"(.+)\"/) || []
 

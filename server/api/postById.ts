@@ -24,5 +24,6 @@ export default async (req: IncomingMessage) => {
 
   cache.set(cacheKey, JSON.stringify(data))
 
+  delete data.iphash
   return data
 }

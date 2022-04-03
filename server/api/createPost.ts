@@ -154,6 +154,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
   }
 
   await db.collection('posts').add(data)
+  delete data.iphash
   cache.clear()
   return data
 }
