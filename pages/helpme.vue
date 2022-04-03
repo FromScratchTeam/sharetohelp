@@ -9,7 +9,12 @@
     v-model:cryptoaddress="cryptoaddress"
   />
   <div class="action">
-    <button primary-button @click="onContinue">{{ isLastStep ? $t('publish') : $t('next') }}</button>
+    <button primary-button @click="onContinue">
+    {{
+      publishing ? $t('publishing') :
+        isLastStep ? $t('publish') : $t('next')
+    }}
+    </button>
   </div>
 </section>
 </template>
@@ -37,6 +42,7 @@ const cryptoaddress = ref({
 const toast = useToast()
 const router = useRouter()
 const { t } = useI18n()
+const publishing = ref(false)
 
 const isEmptyStory = computed(() => storyTitle.value.length === 0 || storyContent.value.length === 0)
 
@@ -47,6 +53,7 @@ const isEmptyCryptoaddress =
 
 
 const submitPost = async () => {
+  publishing.value = true
   try {
     const { data } = await axios.post('/createPost', {
       title: storyTitle.value,
@@ -56,14 +63,16 @@ const submitPost = async () => {
       cryptoaddress: cryptoaddress.value
     })
 
-    toast.success(t('storyPublished'))
-
     localStorage.setItem('tokenPost', JSON.stringify({
       id: data.id,
       token: data.token,
     }))
 
-    router.replace({ name: 'me-post', params: { post: data.token } })
+    setTimeout(() => {
+      toast.success(t('storyPublished'))
+      router.replace({ name: 'me-post', params: { post: data.token } })
+      publishing.value = false
+    }, 1000);
   } catch ({ response }) {
     toast.error(t(response.data))
   }

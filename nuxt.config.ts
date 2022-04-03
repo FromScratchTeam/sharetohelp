@@ -71,7 +71,8 @@ export default defineNuxtConfig({
           addressCopied: 'Адреса скопійовано',
           enterYourCardNumber: 'Напишіть номер картки...',
           insertAddress: 'Вставте адресу...',
-          getHelpTitle: 'Як би ви хотіли отримати допомогу?'
+          getHelpTitle: 'Як би ви хотіли отримати допомогу?',
+          publishing: 'Публікація...'
         },
         en: {
           generalMessage: 'The <b>Share to Help</b> project does not review content. We believe that the best way to make sure people really need help is to write to them directly.',
@@ -124,7 +125,8 @@ export default defineNuxtConfig({
           addressCopied: 'Address copied',
           enterYourCardNumber: 'Enter your card number...',
           insertAddress: 'Insert address...',
-          getHelpTitle: 'How would you like to get help?'
+          getHelpTitle: 'How would you like to get help?',
+          publishing: 'Publishing...'
         },
         ru: {
           generalMessage: 'Проект <b>Share to Help</b> не занимается проверкой контента. Мы считаем, что лучшим способом убедиться что людям действительно нужна помощь - это написать им напрямую.',
@@ -177,7 +179,8 @@ export default defineNuxtConfig({
           addressCopied: 'Адрес скопирован',
           enterYourCardNumber: 'Напишите номер карты...',
           insertAddress: 'Вставьте адрес...',
-          getHelpTitle: 'Как бы вы хотели получить помощь?'
+          getHelpTitle: 'Как бы вы хотели получить помощь?',
+          publishing: 'Публикация...'
         }
       }
     }
