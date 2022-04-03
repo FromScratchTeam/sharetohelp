@@ -28,6 +28,7 @@ import axios from '@/axios'
 import { useI18n } from 'vue-i18n'
 
 const step = ref(0)
+const cookieTokenPost = useCookie('tokenPost')
 const cmpList = [Editor, TelegramUsername, Gethelp]
 const currentCmp = computed(() => cmpList[step.value])
 const telegramUsername = ref('')
@@ -63,10 +64,10 @@ const submitPost = async () => {
       cryptoaddress: cryptoaddress.value
     })
 
-    localStorage.setItem('tokenPost', JSON.stringify({
+    cookieTokenPost.value = {
       id: data.id,
-      token: data.token,
-    }))
+      token: data.token
+    }
 
     setTimeout(() => {
       toast.success(t('storyPublished'))

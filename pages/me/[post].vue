@@ -22,6 +22,7 @@
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification'
 import dateFormat from "dateformat"
+let cookieTokenPost = useCookie('tokenPost')
 
 const router = useRouter()
 const route = useRoute()
@@ -46,15 +47,14 @@ try {
 }
 
 const onDelete = async () => {
-  const data = JSON.parse(localStorage.getItem('tokenPost'))
   try {
     await $fetch('/api/deletePost', {
       method: 'POST',
       body: {
-        token: data.token
+        token: cookieTokenPost.value.token
       }
     })
-    localStorage.removeItem('tokenPost')
+    cookieTokenPost.value = null
     toast.success(t('postDeleted'))
 
     router.replace({ name: 'index' })

@@ -28,6 +28,7 @@ import { useI18n } from 'vue-i18n'
 const { locale } = useI18n({ useScope: 'global' })
 const router = useRouter()
 const textButton = ref('iNeedHelp')
+const cookieTokenPost = useCookie('tokenPost')
 
 const list = [
   {
@@ -48,27 +49,13 @@ const onChangeLanguage = ({ target: { value }}) => {
   locale.value = value
 }
 
-onMounted(() => {
-  try {
-    const data = JSON.parse(localStorage.getItem('tokenPost'))
-    const token = data.token
-
-    if (token) {
-      textButton.value = 'myStory'
-    }
-  } catch {}
-})
+if (cookieTokenPost.value?.token) {
+  textButton.value = 'myStory'
+}
 
 const onClick = () => {
-  let token = null
-
-  try {
-    const data = JSON.parse(localStorage.getItem('tokenPost'))
-    token = data.token
-  } catch {}
-
-  if (token) {
-    router.push({ name: 'me-post', params: { post: token } })
+  if (cookieTokenPost.value?.token) {
+    router.push({ name: 'me-post', params: { post: cookieTokenPost.value.token } })
   } else {
     router.push({ name: 'helpme' })
   }

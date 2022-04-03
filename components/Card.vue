@@ -17,12 +17,7 @@
 </template>
 
 <script setup>
-const storageData = ref()
-
-try {
-  const data = JSON.parse(localStorage.getItem('tokenPost'))
-  storageData.value = data
-} catch {}
+let cookieTokenPost = useCookie('tokenPost')
 
 const props = defineProps({
   id: {
@@ -51,7 +46,7 @@ const link = computed(() => `https://t.me/${props.telegramUsername}`)
 const router = useRouter()
 
 const onClick = () => {
-  const { token, id } = storageData.value || {}
+  const { token, id } = cookieTokenPost.value || {}
 
   if (token && id === props.id) {
     router.push({ name: 'me-post', params: { post: token } })
