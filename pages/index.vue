@@ -3,7 +3,7 @@
   <div class="info">
     <p text-default class="project-description" v-html="$t('generalMessage')" />
   </div>
-  <div header-text v-if="pendingList" class="pending">
+  <div header-text v-if="pendingList" class="pending raw-text">
     {{ $t('loading') }}
   </div>
   <section v-else-if="!isEmptyList">
@@ -20,7 +20,7 @@
       />
     </div>
   </section>
-  <div header-text v-else v-html="$t('projectAppeared')"></div>
+  <div header-text v-else v-html="$t('projectAppeared')" class="raw-text"></div>
 </div>
 </template>
 
@@ -116,5 +116,13 @@ section {
 
 .pending {
   color: var(--color-placeholder);
+}
+
+.raw-text {
+  margin-left: 10px;
+
+  @include mq($from: tablet) {
+    margin-left: 0;
+  }
 }
 </style>

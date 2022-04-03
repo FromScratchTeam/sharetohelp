@@ -99,6 +99,10 @@ header {
     padding: 0;
     margin-top: 0;
   }
+
+  a {
+    font-size: 18px;
+  }
 }
 
 ul {
