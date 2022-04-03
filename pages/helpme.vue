@@ -9,7 +9,7 @@
     v-model:cryptoaddress="cryptoaddress"
   />
   <div class="action">
-    <button primary-button @click="onContinue">
+    <button primary-button @click="onContinue" :disabled="publishing">
     {{
       publishing ? $t('publishing') :
         isLastStep ? $t('publish') : $t('next')
