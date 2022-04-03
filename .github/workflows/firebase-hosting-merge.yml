@@ -12,11 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: yarn install && yarn global add firebase-tools
+        run: yarn install
       - name: Build
-        env:
-          NITRO_PRESET: firebase yarn build
-        run: yarn build
+        run: yarn build && yarn global add firebase-tools && NITRO_PRESET=firebase yarn build'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
