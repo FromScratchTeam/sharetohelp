@@ -24,7 +24,6 @@ import Editor from '@/components/Editor.vue'
 import TelegramUsername from '@/components/TelegramUsername.vue'
 import Gethelp from '@/components/Gethelp.vue'
 import { useToast } from 'vue-toastification'
-import axios from '@/axios'
 import { useI18n } from 'vue-i18n'
 
 const step = ref(0)
@@ -56,12 +55,15 @@ const isEmptyCryptoaddress =
 const submitPost = async () => {
   publishing.value = true
   try {
-    const { data } = await axios.post('/createPost', {
-      title: storyTitle.value,
-      story: storyContent.value,
-      telegramUsername: telegramUsername.value.replace(/^@/, ''),
-      creditcard: cardnumber.value ? cardnumber.value.replace(/\s/g, '') : null,
-      cryptoaddress: cryptoaddress.value
+    const { data } = await $fetch('/createPost', {
+      method: 'POST',
+      body: {
+        title: storyTitle.value,
+        story: storyContent.value,
+        telegramUsername: telegramUsername.value.replace(/^@/, ''),
+        creditcard: cardnumber.value ? cardnumber.value.replace(/\s/g, '') : null,
+        cryptoaddress: cryptoaddress.value
+      }
     })
 
     cookieTokenPost.value = {
