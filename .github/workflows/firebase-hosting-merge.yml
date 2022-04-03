@@ -17,8 +17,6 @@ jobs:
       - uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build
-        env:
-          NITRO_PRESET: firebase yarn build
       - run: yarn start
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

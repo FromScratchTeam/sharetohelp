@@ -20,7 +20,7 @@
     <h2 header-text>{{ $t('aboutusTitles[4]') }}</h2>
     <p text-default>
       {{ $t('aboutusParahprahs[4]') }}
-      <a href="https://github.com/FromScratchTeam/sharetohelp" target="_blank">{{ $t('sourceCode') }}</a>
+      <!-- <a href="https://github.com/FromScratchTeam/sharetohelp" target="_blank">{{ $t('sourceCode') }}</a> -->
     </p>
   </div>
 </section>
