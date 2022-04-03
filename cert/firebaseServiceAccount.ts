@@ -1,12 +1,14 @@
+import functions from 'firebase-functions'
+
 export default {
-  "type": process.env.FIREBASE_TYPE,
-  "project_id": process.env.FIREBASE_PROJECT_ID,
-  "private_key_id": process.env.FIREBASE_PRIVATE_KEY_ID,
-  "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-  "client_email": process.env.FIREBASE_CLIENT_EMAIL,
-  "client_id": process.env.FIREBASE_CLIENT_ID,
-  "auth_uri": process.env.FIREBASE_AUTH_URI,
-  "token_uri": process.env.FIREBASE_TOKEN_URI,
-  "auth_provider_x509_cert_url": process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-  "client_x509_cert_url": process.env.FIREBASE_CLIENT_X509_CERT_URL
+  "type": functions.config().project.firebase_type,
+  "project_id": functions.config().project.firebase_id,
+  "private_key_id": functions.config().project.private_key_id,
+  "private_key": functions.config().project.private_key.replace(/\\n/g, '\n'),
+  "client_email": functions.config().project.client_email,
+  "client_id": functions.config().project.client_id,
+  "auth_uri": functions.config().project.auth_uri,
+  "token_uri": functions.config().project.token_uri,
+  "auth_provider_x509_cert_url": functions.config().auth_provider_x509_cert_url,
+  "client_x509_cert_url": functions.config().client_x509_cert_url
 }

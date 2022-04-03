@@ -14,7 +14,7 @@
 
 
 <script setup>
-import { mask } from 'maska'
+import * as maska from 'maska'
 import dateFormat from "dateformat"
 
 const route = useRoute()
@@ -36,7 +36,7 @@ try {
 
   post.value = { ...data.value }
   if (post.value.creditcard) {
-    creditCardView.value = mask(post.value.creditcard, '#### #### #### ####')
+    creditCardView.value = maska.mask(post.value.creditcard, '#### #### #### ####')
     activeIndex.value = 0
   } else if (cryptoaddress.value) {
     activeIndex.value = 1
