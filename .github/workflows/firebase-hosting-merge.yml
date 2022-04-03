@@ -14,10 +14,4 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build
-        run: yarn build && yarn global add firebase-tools && NITRO_PRESET=firebase yarn build && firebase deploy --token '${{ secrets.FIREBASE_TOKEN }}'
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SHAREHELP_A354B }}'
-          channelId: live
-          projectId: sharehelp-a354b
+        run: yarn global add firebase-tools && NITRO_PRESET=firebase yarn build && firebase deploy --token '${{ secrets.FIREBASE_TOKEN }}'
