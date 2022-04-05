@@ -71,11 +71,9 @@ const submitPost = async () => {
       token: data.token
     }
 
-    setTimeout(() => {
-      toast.success(t('storyPublished'))
-      router.replace({ name: 'me-post', params: { post: data.token } })
-      publishing.value = false
-    }, 1000);
+    toast.success(t('storyPublished'))
+    router.replace({ name: 'me-post', params: { post: data.token } })
+    publishing.value = false
   } catch ({ response }) {
     toast.error(t(response.data))
   }

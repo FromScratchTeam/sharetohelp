@@ -1,7 +1,9 @@
 <template>
   <main>
-    <Header class="header" />
-    <NuxtPage />
+    <ClientOnly>
+      <Header class="header" />
+      <NuxtPage />
+    </ClientOnly>
   </main>
 </template>
 

@@ -2,9 +2,9 @@
   <div class="header-container">
     <header>
       <ul>
+        <li><NuxtLink :to="{name: 'helpme'}" class="dotoff"><button primary-button @click.prevent="onClick">{{ $t(textButton) }}</button></NuxtLink></li>
         <li><NuxtLink :to="{name: 'index'}">{{ $t('whoNeedsHelp') }}</NuxtLink></li>
         <li><NuxtLink :to="{name: 'aboutus'}">{{ $t('aboutUs') }}</NuxtLink></li>
-        <li><NuxtLink :to="{name: 'helpme'}" class="dotoff"><button primary-button @click.prevent="onClick">{{ $t(textButton) }}</button></NuxtLink></li>
       </ul>
     </header>
     <div class="choose-language">
