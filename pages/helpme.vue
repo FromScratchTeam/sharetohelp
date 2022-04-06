@@ -55,7 +55,7 @@ const isEmptyCryptoaddress =
 const submitPost = async () => {
   publishing.value = true
   try {
-    const { data } = await $fetch('/createPost', {
+    const { data } = await $fetch('/api/createPost', {
       method: 'POST',
       body: {
         title: storyTitle.value,
