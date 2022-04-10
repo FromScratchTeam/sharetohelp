@@ -25,10 +25,13 @@
 </template>
 
 <script setup>
+definePageMeta({
+  title: 'pageTitles.home'
+})
+
 const postList = ref([[], [], []])
 const isEmptyList = computed(() => postList.value[0].length === 0)
 const pendingList = ref(false)
-
 
 const splitToChunks = (array, parts) => {
   let result = [];

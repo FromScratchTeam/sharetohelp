@@ -15,12 +15,27 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  meta: {
+    link: [
+      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+      { rel: 'manifest', href: '/manifest.json' },
+    ],
+  },
   
   intlify: {
     vueI18n: {
       locale: 'ua',
       messages: {
         ua: {
+          pageTitles: {
+            home: 'Головна',
+            helpme: 'Мені потрібна допомога',
+            aboutUs: 'Про нас'
+          },
+          headDescription: 'Платформа, створена небайдужими людьми, для допомоги громадянам України, постраждалим пiд час военних дiй на території України.',
           generalMessage: 'Проект <b>Share to Help</b> не перевірить контент. Ми вважаємо, що найкращим способом переконатися, що людям дійсно потрібна допомога – це написати їм безпосередньо.',
           whoNeedsHelp: 'Хто потребує допомоги',
           aboutUs: 'Про нас',
@@ -75,6 +90,12 @@ export default defineNuxtConfig({
           publishing: 'Публікація...'
         },
         en: {
+          pageTitles: {
+            home: 'Home',
+            helpme: 'I need help',
+            aboutUs: 'About us'
+          },
+          headDescription: 'A platform created by caring people to help Ukrainian citizens affected by hostilities in Ukraine.',
           generalMessage: 'The <b>Share to Help</b> project does not review content. We believe that the best way to make sure people really need help is to write to them directly.',
           whoNeedsHelp: 'Who needs help',
           aboutUs: 'About us',
@@ -129,6 +150,12 @@ export default defineNuxtConfig({
           publishing: 'Publishing...'
         },
         ru: {
+          pageTitles: {
+            home: 'Главная',
+            helpme: 'Мне нужна помощь',
+            aboutUs: 'О нас'
+          },
+          headDescription: 'Платформа созданная неравнодушными людьми, для помощи гражданам Украины, пострадавшим от военных действий на территории Украины.',
           generalMessage: 'Проект <b>Share to Help</b> не занимается проверкой контента. Мы считаем, что лучшим способом убедиться что людям действительно нужна помощь - это написать им напрямую.',
           whoNeedsHelp: 'Кому нужна помощь',
           aboutUs: 'О нас',

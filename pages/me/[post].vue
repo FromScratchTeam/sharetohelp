@@ -39,6 +39,8 @@ try {
     }
   })
 
+  setClientHeadTitle(data.title)
+
   post.value = { ...data }
   createdAt.value = dateFormat(post.value.createdAt, "dd.mm.yyyy, hh:MM")
 } catch {

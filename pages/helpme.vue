@@ -26,6 +26,11 @@ import Gethelp from '@/components/Gethelp.vue'
 import { useToast } from 'vue-toastification'
 import { useI18n } from 'vue-i18n'
 
+
+definePageMeta({
+  title: 'pageTitles.helpme'
+})
+
 const step = ref(0)
 const cookieTokenPost = useCookie('tokenPost')
 const cmpList = [Editor, TelegramUsername, Gethelp]

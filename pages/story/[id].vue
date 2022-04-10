@@ -15,7 +15,8 @@
 
 <script setup>
 import * as maska from 'maska'
-import dateFormat from "dateformat"
+import dateFormat from 'dateformat'
+import { setClientHeadTitle } from '@/utils/headMeta'
 
 const route = useRoute()
 
@@ -27,14 +28,15 @@ const cryptoaddress = ref({})
 const activeIndex = ref(0)
 
 try {
-  const { data } = await useAsyncData('mypost', () => $fetch('/api/postById', {
-      params: {
-        id: route.params.id
-      }
-    })
-  )
+  const data = await $fetch('/api/postById', {
+    params: {
+      id: route.params.id
+    }
+  })
 
-  post.value = { ...data.value }
+  setClientHeadTitle(data.title)
+
+  post.value = { ...data }
   if (post.value.creditcard) {
     creditCardView.value = maska.mask(post.value.creditcard, '#### #### #### ####')
     activeIndex.value = 0

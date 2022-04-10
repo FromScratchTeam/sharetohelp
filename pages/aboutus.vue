@@ -26,6 +26,13 @@
 </section>
 </template>
 
+<script setup>
+definePageMeta({
+  title: 'pageTitles.aboutUs'
+})
+
+</script>
+
 <style lang="scss" scoped>
 section {
   display: grid;

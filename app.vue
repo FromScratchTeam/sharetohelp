@@ -8,10 +8,23 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n';
+import { useI18n } from 'vue-i18n'
+
+const route = useRoute()
+const { t, locale } = useI18n()
+
+useMeta({
+  title: computed(() => `${route.meta?.title && t(route.meta.title)} | Share to Help`),
+  meta: [
+    {
+      name: 'description',
+      content: computed(() => t('headDescription')),
+    }
+  ]
+})
+
 const cookieLang = useCookie('lang')
 
-const { locale } = useI18n()
 
 watch(locale, (value) => {
   cookieLang.value = value

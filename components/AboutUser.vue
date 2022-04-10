@@ -44,8 +44,8 @@
 </template>
 
 <script setup>
-import { useI18n } from 'vue-i18n';
-import copy from 'copy-to-clipboard';
+import { useI18n } from 'vue-i18n'
+import copy from 'copy-to-clipboard'
 import { useToast } from 'vue-toastification'
 
 const { t } = useI18n()
