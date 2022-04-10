@@ -27,7 +27,6 @@
 <script setup>
 const postList = ref([[], [], []])
 const isEmptyList = computed(() => postList.value[0].length === 0)
-const fetchPostList = () => useLazyAsyncData('postList', () => $fetch('/api/postList'))
 const pendingList = ref(false)
 
 
@@ -43,24 +42,17 @@ const setPostList = (data) => {
   postList.value = splitToChunks(data, 3)
 }
 
-try {
-  const { data, pending } = await fetchPostList()
-  pendingList.value = pending.value
-
-  if (data.value) {
-    setPostList([...data.value])
+onMounted(async () => {
+  pendingList.value = true
+  try {
+    const data = await $fetch('/api/postList')
+    setPostList([...data])
+  } catch (error) {
+    console.error(error)
+  } finally {
+    pendingList.value = false
   }
-
-  watch(data, newData => {
-    setPostList([...newData])
-  })
-
-  watch(pending, value => {
-    pendingList.value = value
-  })
-} catch (error) {
-  console.error(error)
-}
+})
 </script>
 
 <style lang="scss" scoped>

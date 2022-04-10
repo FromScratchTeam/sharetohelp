@@ -1,5 +1,5 @@
 import LRU from 'lru-cache'
 
 export const cache = new LRU({
-  max: 50000,
+  max: 5000000,
 })

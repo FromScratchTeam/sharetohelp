@@ -33,14 +33,13 @@ const post = ref()
 const createdAt = ref('')
 
 try {
-  const { data } = await useAsyncData('ownpost', () => $fetch('/api/ownpost', {
-      params: {
-        post: route.params.post
-      }
-    })
-  )
+  const data = await $fetch('/api/ownpost', {
+    params: {
+      post: route.params.post
+    }
+  })
 
-  post.value = { ...data.value }
+  post.value = { ...data }
   createdAt.value = dateFormat(post.value.createdAt, "dd.mm.yyyy, hh:MM")
 } catch {
   console.error(err)
