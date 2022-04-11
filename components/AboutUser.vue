@@ -73,7 +73,7 @@ const creditCardView = ref('')
 
 
 const onCopyCardNumber = () => {
-  copy(props.value.cardnumber?.replace(/\s/g, ''))
+  copy(props.cardnumber?.replace(/\s/g, ''))
   toast.success(t('cardNumberCopied'))
 }
 
