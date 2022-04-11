@@ -43,7 +43,7 @@ try {
 
   post.value = { ...data }
   createdAt.value = dateFormat(post.value.createdAt, "dd.mm.yyyy, hh:MM")
-} catch {
+} catch (err) {
   console.error(err)
 }
 
