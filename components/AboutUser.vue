@@ -44,6 +44,7 @@
 </template>
 
 <script setup>
+import * as maska from 'maska'
 import { useI18n } from 'vue-i18n'
 import copy from 'copy-to-clipboard'
 import { useToast } from 'vue-toastification'
@@ -84,7 +85,7 @@ const onCopyNetwork = () => {
 
 
 if (props.cardnumber) {
-  creditCardView.value = mask(props.cardnumber, '#### #### #### ####')
+  creditCardView.value = maska.mask(props.cardnumber, '#### #### #### ####')
   activeIndex.value = 0
 } else if (props.cryptoaddress) {
   activeIndex.value = 1
