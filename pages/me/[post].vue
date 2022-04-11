@@ -21,6 +21,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification'
+import { setClientHeadTitle } from '@/utils/headMeta'
 import dateFormat from "dateformat"
 let cookieTokenPost = useCookie('tokenPost')
 

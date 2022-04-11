@@ -5,7 +5,7 @@ import { createHash } from 'crypto'
 import { v4 as uuidv4 } from 'uuid';
 import { useBody } from 'h3'
 import { cache } from '~/server/cache'
-import ip from 'ip'
+import requestIp from 'request-ip'
 
 const db = getFirestore();
 
@@ -91,10 +91,11 @@ const genSha256 = (value: string) => {
     .digest('hex')
 }
 
-const checkAbilityToCreatePost = async () => {
+const checkAbilityToCreatePost = async (req: IncomingMessage) => {
   const day = 60 * 60 * 24 * 1000
+  const clientIp = requestIp.getClientIp(req)
+  const iphsah = genSha256(clientIp)
 
-  const iphsah = genSha256(ip.address())
   const { docs } = await db
     .collection('posts')
     .where('iphash', '==', iphsah).get()
@@ -113,7 +114,9 @@ const checkAbilityToCreatePost = async () => {
 export default async (req: IncomingMessage, res: ServerResponse) => {
   const body = await useBody(req)
   const createdAt = new Date().toISOString()
-  const hasAbilityToCreatePost = await checkAbilityToCreatePost()
+  const hasAbilityToCreatePost = await checkAbilityToCreatePost(req)
+  const clientIp = requestIp.getClientIp(req)
+  const iphash = genSha256(clientIp)
 
   try {
     if (!hasAbilityToCreatePost) {
@@ -136,7 +139,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
 
   let data = {
     id: uuidv4(),
-    iphash: genSha256(ip.address()),
+    iphash,
     title: body.title,
     story,
     telegramUsername: body.telegramUsername,
