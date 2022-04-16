@@ -3,10 +3,8 @@
   <div class="info">
     <p text-default class="project-description" v-html="$t('generalMessage')" />
   </div>
-  <div header-text v-if="pendingList" class="pending raw-text">
-    {{ $t('loading') }}
-  </div>
-  <section v-else-if="!isEmptyList">
+  <div v-if="isEmptyList && !pendingList" header-text v-html="$t('projectAppeared')" class="raw-text"></div>
+  <section v-show="!isEmptyList">
     <div class="column" :key="columnIndex" v-for="(column, columnIndex) in postList">
       <Card
         class="column-card"
@@ -19,19 +17,27 @@
         v-for="(item, key) in column"
       />
     </div>
+    <InfiniteLoading :posts="postList" @infinite="loadNewPosts">
+      <template #complete><span /></template>
+    </InfiniteLoading>
   </section>
-  <div header-text v-else v-html="$t('projectAppeared')" class="raw-text"></div>
+  <div header-text v-if="pendingList" class="pending raw-text">
+    {{ $t('loading') }}
+  </div>
 </div>
 </template>
 
 <script setup>
+import InfiniteLoading from 'v3-infinite-loading'
+let page = 1
+
 definePageMeta({
   title: 'pageTitles.home'
 })
 
 const postList = ref([[], [], []])
 const isEmptyList = computed(() => postList.value[0].length === 0)
-const pendingList = ref(false)
+const pendingList = ref(true)
 
 const splitToChunks = (array, parts) => {
   let result = [];
@@ -41,21 +47,43 @@ const splitToChunks = (array, parts) => {
   return result;
 }
 
-const setPostList = (data) => {
-  postList.value = splitToChunks(data, 3)
+const mergeList = (data) => {
+  return data.reduce((acc, array) => {
+    return [
+      ...acc,
+      ...array
+    ]
+  }, [])
 }
 
-onMounted(async () => {
+const setPostList = (data) => {
+  postList.value = splitToChunks([...mergeList(postList.value), ...data], 3)
+}
+
+
+const loadNewPosts = async (state) => {
   pendingList.value = true
+  const perPage = 9
+
   try {
-    const data = await $fetch('/api/postList')
-    setPostList([...data])
+    const data = await $fetch('/api/postList', {
+      params: {
+        perPage,
+        page
+      }
+    })
+
+    if (data.length < perPage) state.complete()
+    else state.loaded()
+    setPostList(data)
+
+    page++;
   } catch (error) {
-    console.error(error)
+    state.error()
   } finally {
     pendingList.value = false
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>
