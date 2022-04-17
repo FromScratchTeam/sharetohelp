@@ -1,9 +1,7 @@
 <template>
   <main>
-    <ClientOnly>
-      <Header class="header" />
-      <NuxtPage />
-    </ClientOnly>
+    <Header class="header" />
+    <NuxtPage />
   </main>
 </template>
 
@@ -12,9 +10,10 @@ import { useI18n } from 'vue-i18n'
 
 const route = useRoute()
 const { t, locale } = useI18n()
+const pageTitle = useState('pageTitle')
 
 useMeta({
-  title: computed(() => `${route.meta?.title && t(route.meta.title)} | Share to Help`),
+  title: computed(() => `${route.meta?.title ? t(route.meta.title) : pageTitle.value} | Share to Help`),
   meta: [
     {
       name: 'description',
@@ -23,15 +22,17 @@ useMeta({
   ]
 })
 
-const cookieLang = useCookie('lang')
+const cookieLang = useCookie('__session')
 
 
 watch(locale, (value) => {
-  cookieLang.value = value
+  cookieLang.value = {
+    lang: value
+  }
 })
 
-if (cookieLang.value) {
-  locale.value = cookieLang.value
+if (cookieLang.value?.lang) {
+  locale.value = cookieLang.value?.lang
 }
 
 </script>

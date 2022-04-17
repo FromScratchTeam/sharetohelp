@@ -14,14 +14,11 @@
 
 
 <script setup>
-import * as maska from 'maska'
 import dateFormat from 'dateformat'
-import { setClientHeadTitle } from '@/utils/headMeta'
 
 const route = useRoute()
 
 const post = ref({})
-const creditCardView = ref('')
 const link = computed(() => `https://t.me/${post.value?.telegramUsername}`)
 const createdAt = ref('')
 const cryptoaddress = ref({})
@@ -34,11 +31,11 @@ try {
     }
   })
 
-  setClientHeadTitle(data.title)
+  const pageTitle = useState('pageTitle')
+  pageTitle.value = data.title
 
   post.value = { ...data }
   if (post.value.creditcard) {
-    creditCardView.value = maska.mask(post.value.creditcard, '#### #### #### ####')
     activeIndex.value = 0
   } else if (cryptoaddress.value) {
     activeIndex.value = 1

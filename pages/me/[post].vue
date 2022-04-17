@@ -21,7 +21,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { useToast } from 'vue-toastification'
-import { setClientHeadTitle } from '@/utils/headMeta'
 import dateFormat from "dateformat"
 let cookieTokenPost = useCookie('tokenPost')
 
@@ -40,7 +39,8 @@ try {
     }
   })
 
-  setClientHeadTitle(data.title)
+  const pageTitle = useState('pageTitle')
+  pageTitle.value = data.title
 
   post.value = { ...data }
   createdAt.value = dateFormat(post.value.createdAt, "dd.mm.yyyy, hh:MM")

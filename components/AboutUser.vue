@@ -85,11 +85,14 @@ const onCopyNetwork = () => {
 
 
 if (props.cardnumber) {
-  creditCardView.value = maska.mask(props.cardnumber, '#### #### #### ####')
   activeIndex.value = 0
 } else if (props.cryptoaddress) {
   activeIndex.value = 1
 }
+
+onMounted(() => {
+  creditCardView.value = maska.mask(props.cardnumber, '#### #### #### ####')
+})
 </script>
 
 
