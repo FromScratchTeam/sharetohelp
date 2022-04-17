@@ -2,7 +2,6 @@ import type { IncomingMessage } from 'http'
 import { useQuery } from 'h3'
 import { getFirestore } from 'firebase-admin/firestore'
 import innertext from 'innertext'
-import { cache } from '~/server/cache'
 
 const db = getFirestore();
 
@@ -10,12 +9,6 @@ export default async (req: IncomingMessage) => {
   const params = useQuery(req)
   const page = Number(params.page) - 1
   const perPage = Number(params.perPage)
-
-  let cachePostList = JSON.parse(cache.get('postList-' + page) || '[]')
-
-  if (cachePostList.length > 0) {
-    return cachePostList
-  }
 
   const { docs } = await db
     .collection('posts')
@@ -45,7 +38,5 @@ export default async (req: IncomingMessage) => {
     return response
   })
 
-  
-  cache.set('postList-' + page, JSON.stringify(postList))
   return postList
 }

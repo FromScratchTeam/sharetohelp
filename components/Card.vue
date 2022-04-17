@@ -7,7 +7,7 @@
       <div class="container">
         <div class="text-info">
           <div text-default>{{ title }}</div>
-          <div>{{ description }}</div>
+          <div class="description">{{ description }}</div>
           <NuxtLink :to="link" target="_blank" @click.stop>@{{ telegramUsername }}</NuxtLink>
         </div>
       </div>
@@ -86,6 +86,13 @@ const onClick = () => {
 .text-info {
   display: grid;
   gap: 10px;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 12;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 img {
