@@ -29,3 +29,5 @@ yarn build
 ```
 
 Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
+
+Author: Mikhail Landau
